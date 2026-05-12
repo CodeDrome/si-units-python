@@ -1,4 +1,5 @@
 from types import MappingProxyType
+from typing import Dict
 
 
 class SIBaseUnit(object):
@@ -62,7 +63,7 @@ class SIBaseUnit(object):
                })
 
 
-    def __init__(self, quantity, prefix, value = 0):
+    def __init__(self, quantity: Dict, prefix: Dict, value:float = 0):
 
         """
         quantity is one of the quantities values,
@@ -78,28 +79,28 @@ class SIBaseUnit(object):
 
 
     @property
-    def value(self):
+    def value(self) -> float:
         return self.base_value_to_prefixed(self._value_base, self._prefix)
     @value.setter
-    def value(self, value):
+    def value(self, value: float):
         self._value_base = self.prefixed_value_to_base(value, self._prefix)
 
 
     @property
-    def prefix(self):
+    def prefix(self) -> str:
         return self._prefix
 
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f'SIBaseUnit("{self._quantity}","{self._prefix}",{self.base_value_to_prefixed()})'
 
 
-    def __str__(self):
+    def __str__(self) -> str:
 
         return self.string_short()
 
 
-    def string_long(self):
+    def string_long(self) -> str:
 
         if self._prefix['name'] != "none":
             prefix = self._prefix['name']
@@ -109,7 +110,7 @@ class SIBaseUnit(object):
         return f"{self.base_value_to_prefixed(self._value_base, self._prefix):g} {prefix}{self._quantity['baseunit']}"
 
 
-    def string_short(self):
+    def string_short(self) -> str:
 
         if self._prefix['name'] != "none":
             symbol = self._prefix['symbol']
@@ -146,7 +147,7 @@ class SIBaseUnit(object):
         return SIBaseUnit(self._quantity, self._prefix, prefixed_difference)
 
 
-    def __mul__(self, value):
+    def __mul__(self, value: float):
 
         base_1 = self.prefixed_value_to_base(self.value, self.prefix)
         base_product = base_1 * value
@@ -155,7 +156,7 @@ class SIBaseUnit(object):
         return SIBaseUnit(self._quantity, self._prefix, prefixed_product)
 
 
-    def __rmul__(self, value):
+    def __rmul__(self, value: float):
 
         base_1 = self.prefixed_value_to_base(self.value, self.prefix)
         base_product = base_1 * value
@@ -164,7 +165,7 @@ class SIBaseUnit(object):
         return SIBaseUnit(self._quantity, self._prefix, prefixed_product)
 
 
-    def __truediv__(self, value):
+    def __truediv__(self, value: float):
 
         base_1 = self.prefixed_value_to_base(self.value, self.prefix)
         base_quotient = base_1 / value
@@ -233,13 +234,13 @@ class SIBaseUnit(object):
         return base_1 != base_2
 
 
-    def __check_quantities(self, other):
+    def __check_quantities(self, other) -> None:
 
         if self._quantity != other._quantity:
             raise TypeError('Both units must be of same quantity')
 
 
-    def output(self):
+    def output(self) -> None:
 
         print(f"quantity:       {self._quantity['name']}")
         print(f"base unit:      {self._quantity['baseunit']}")
@@ -250,12 +251,12 @@ class SIBaseUnit(object):
 
 
     @staticmethod
-    def prefixed_value_to_base(value_prefixed, prefix):
+    def prefixed_value_to_base(value_prefixed: float, prefix: str) -> float:
 
         return value_prefixed * 10 ** prefix['power']
 
 
     @staticmethod
-    def base_value_to_prefixed(value_base, prefix):
+    def base_value_to_prefixed(value_base: float, prefix: str) -> float:
 
         return value_base / (10 ** prefix['power'])

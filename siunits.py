@@ -10,11 +10,11 @@ def main():
     print("----------------------\n")
 
 
-    # quantities()
+    quantities()
 
     # add_and_subtract()
 
-    add_error()
+    # add_error()
 
     # multiply_and_divide()
 
@@ -22,6 +22,10 @@ def main():
 
 
 def quantities():
+
+    """
+    Create and output samples of each base type
+    """
 
     print("time\n====")
 
@@ -116,26 +120,35 @@ def quantities():
 
 def add_and_subtract():
 
-    l_1 = sibu.SIBaseUnit(quantity = sibu.SIBaseUnit.quantities["length"],
+    """
+    Demo adding and subtracting lengths.
+    Note that the mix of centimetres and millimetres works fine.
+    """
+
+    length_1 = sibu.SIBaseUnit(quantity = sibu.SIBaseUnit.quantities["length"],
                           prefix = sibu.SIBaseUnit.prefixes["centi"],
                           value = 12)
 
-    l_2 = sibu.SIBaseUnit(quantity = sibu.SIBaseUnit.quantities["length"],
+    length_2 = sibu.SIBaseUnit(quantity = sibu.SIBaseUnit.quantities["length"],
                           prefix = sibu.SIBaseUnit.prefixes["milli"],
                           value = 30)
 
-    total = l_1 + l_2
+    total = length_1 + length_2
 
-    print(f"l_1:       {l_1}")
-    print(f"l_2:       {l_2}")
-    print(f"l_1 + l_2: {total}")
+    print(f"length_1:       {length_1}")
+    print(f"length_2:       {length_2}")
+    print(f"length_1 + length_2: {total}")
 
-    difference = l_1 - l_2
+    difference = length_1 - length_2
 
-    print(f"l_1 - l_2: {difference}")
+    print(f"length_1 - length_2: {difference}")
 
 
 def add_error():
+
+    """
+    Try to add a length and a mass to show that an exception is raised
+    """
 
     length = sibu.SIBaseUnit(quantity = sibu.SIBaseUnit.quantities["length"],
                           prefix = sibu.SIBaseUnit.prefixes["centi"],
@@ -159,38 +172,47 @@ def add_error():
 
 def multiply_and_divide():
 
-    l_1 = sibu.SIBaseUnit(quantity = sibu.SIBaseUnit.quantities["length"],
+    """
+    Demonstrate multiplying and dividing a length
+    """
+
+    length_1 = sibu.SIBaseUnit(quantity = sibu.SIBaseUnit.quantities["length"],
                           prefix = sibu.SIBaseUnit.prefixes["centi"],
                           value = 16)
 
-    print(f"l_1:     {l_1}")
+    print(f"length_1:     {length_1}")
 
-    product = l_1 * 4
-    print(f"l_1 * 4: {product}")
+    product = length_1 * 4
+    print(f"length_1 * 4: {product}")
 
-    product = 6 * l_1
-    print(f"6 * l_1: {product}")
+    product = 6 * length_1
+    print(f"6 * length_1: {product}")
 
-    quotient = l_1 / 4
-    print(f"l_1 / 4: {quotient}")
+    quotient = length_1 / 4
+    print(f"length_1 / 4: {quotient}")
 
 
 def comparison_operators():
 
-    l_1 = sibu.SIBaseUnit(quantity = sibu.SIBaseUnit.quantities["length"],
+    """
+    Demonstrate <. <=. != etc.
+    Note that we can mix prefixes, centimetres and millimetres etc.
+    """
+
+    length_1 = sibu.SIBaseUnit(quantity = sibu.SIBaseUnit.quantities["length"],
                           prefix = sibu.SIBaseUnit.prefixes["centi"],
                           value = 12)
 
-    l_2 = sibu.SIBaseUnit(quantity = sibu.SIBaseUnit.quantities["length"],
+    length_2 = sibu.SIBaseUnit(quantity = sibu.SIBaseUnit.quantities["length"],
                           prefix = sibu.SIBaseUnit.prefixes["milli"],
                           value = 30)
 
-    print(f"{l_1.string_short()} < {l_2.string_short()}    {l_1 < l_2}")
-    print(f"{l_1.string_short()} <= {l_2.string_short()}   {l_1 <= l_2}")
-    print(f"{l_1.string_short()} == {l_2.string_short()}   {l_1 == l_2}")
-    print(f"{l_1.string_short()} > {l_2.string_short()}    {l_1 > l_2}")
-    print(f"{l_1.string_short()} >= {l_2.string_short()}   {l_1 >= l_2}")
-    print(f"{l_1.string_short()} != {l_2.string_short()}   {l_1 != l_2}")
+    print(f"{length_1.string_short()} < {length_2.string_short()}    {length_1 < length_2}")
+    print(f"{length_1.string_short()} <= {length_2.string_short()}   {length_1 <= length_2}")
+    print(f"{length_1.string_short()} == {length_2.string_short()}   {length_1 == length_2}")
+    print(f"{length_1.string_short()} > {length_2.string_short()}    {length_1 > length_2}")
+    print(f"{length_1.string_short()} >= {length_2.string_short()}   {length_1 >= length_2}")
+    print(f"{length_1.string_short()} != {length_2.string_short()}   {length_1 != length_2}")
 
 
 if __name__ == "__main__":
